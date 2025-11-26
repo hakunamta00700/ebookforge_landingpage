@@ -1,73 +1,424 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EbookForge — AI 전자책 자동 생성기</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 40px;
-            background: #fafafa;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 640px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 40px;
-            font-weight: 700;
-        }
-        
-        p {
-            font-size: 20px;
-            line-height: 1.6;
-        }
-        
-        input {
-            padding: 12px;
-            width: 70%;
-            margin-top: 20px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-        
-        button {
-            padding: 12px 24px;
-            margin-top: 16px;
-            background: #0070f3;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        
-        button:hover {
-            background: #0059c1;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>EbookForge — 누구나 전자책을 만들 수 있도록</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="EbookForge — 전자책을 한 번도 만들어본 사람도 1시간 만에 완성할 수 있게 도와주는 AI 기반 전자책 자동 생성 도구입니다.">
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #fafafa;
+      color: #333;
+      line-height: 1.6;
+    }
+    .language-selector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .lang-btn {
+      padding: 8px 16px;
+      background: #f5f5f5;
+      color: #333;
+      border: 2px solid #bbb;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .lang-btn:hover {
+      background: #e8e8e8;
+      border-color: #0070f3;
+      color: #0070f3;
+      box-shadow: 0 2px 5px rgba(0, 112, 243, 0.2);
+      transform: translateY(-1px);
+    }
+    .lang-btn.active {
+      background: #0070f3;
+      color: white;
+      border-color: #0070f3;
+      box-shadow: 0 2px 8px rgba(0, 112, 243, 0.3);
+      font-weight: 600;
+    }
+    header {
+      text-align: center;
+      padding: 90px 20px 60px;
+      background: white;
+      border-bottom: 1px solid #eee;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: 700;
+      color: #111;
+    }
+    h2 {
+      font-size: 32px;
+      margin: 60px 0 20px;
+      text-align: center;
+      font-weight: 600;
+      color: #111;
+    }
+    p {
+      font-size: 20px;
+      max-width: 720px;
+      margin: 10px auto;
+      text-align: center;
+    }
+    .container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .cta-box {
+      margin-top: 40px;
+      text-align: center;
+      background: #f5f7ff;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid #dbe2ff;
+    }
+    input[type=email] {
+      padding: 14px 18px;
+      width: 70%;
+      max-width: 420px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    button {
+      padding: 14px 26px;
+      background: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: 14px;
+    }
+    button:hover {
+      background: #0059c1;
+    }
+    .section {
+      margin-top: 60px;
+      padding-top: 40px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .feature {
+      background: white;
+      padding: 28px;
+      border-radius: 12px;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+    footer {
+      text-align: center;
+      padding: 40px;
+      margin-top: 80px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>EbookForge</h1>
-        <p>AI로 전자책을 자동 생성하는 도구.<br> 기획 → 목차 → 초안까지 10분 만에.</p>
 
-        <form action="https://YOUR_MAILERLITE_FORM_URL" method="POST">
-            <input type="email" name="email" placeholder="이메일을 입력하세요" required />
-            <button type="submit">출시 알림 받기</button>
-        </form>
+<div class="language-selector">
+  <button class="lang-btn active" onclick="changeLanguage('ko')" data-lang="ko">한국어</button>
+  <button class="lang-btn" onclick="changeLanguage('zh')" data-lang="zh">中文</button>
+  <button class="lang-btn" onclick="changeLanguage('ja')" data-lang="ja">日本語</button>
+  <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">English</button>
+  <button class="lang-btn" onclick="changeLanguage('de')" data-lang="de">Deutsch</button>
+</div>
 
-        <p style="margin-top:30px;font-size:14px;color:#777;">
-            © 2025 EbookForge. All rights reserved.
-        </p>
+<header>
+  <h1>EbookForge</h1>
+  <p data-i18n="tagline">"전자책을 한 번도 써본 적 없는 사람도<br>1시간 안에 첫 전자책을 완성하도록"</p>
+
+  <div class="cta-box">
+    <p style="font-size:18px;" data-i18n="email-prompt">출시 알림을 받고 싶은 이메일을 입력하세요</p>
+    <form action="YOUR_MAILERLITE_FORM_URL" method="POST">
+      <input type="email" name="email" data-i18n-placeholder="email-placeholder" placeholder="이메일 주소" required>
+      <br>
+      <button type="submit" data-i18n="notify-button">출시 알림 받기</button>
+    </form>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 스토리 -->
+  <section class="section">
+    <h2 data-i18n="why-title">왜 EbookForge를 만들었나요?</h2>
+    <p data-i18n="why-p1">
+      저는 전자책으로 돈을 벌어본 적이 없습니다.<br>
+      하지만, 오히려 그게 제가 이 도구를 만들게 된 가장 큰 이유였습니다.
+    </p>
+    <p data-i18n="why-p2">
+      처음 전자책을 만들고 싶을 때, 가장 힘든 점은<br>
+      "어디서부터 시작해야 할지 모른다"는 것이었습니다.<br>
+      목차도 어렵고, 챕터 구성도 어렵고, 글쓰기 자체가 막막하죠.
+    </p>
+    <p data-i18n="why-p3">
+      그래서 생각했습니다.  
+      <br><strong>"전자책을 많이 써본 전문가가 아니라,  
+      전자책을 처음 만들고자 하는 사람의 입장에서  
+      모든 과정을 자동화할 수는 없을까?"</strong>
+    </p>
+    <p data-i18n="why-p4">
+      EbookForge는 바로 그런 문제를 해결하기 위해 시작했습니다.
+    </p>
+  </section>
+
+  <!-- 기능 소개 -->
+  <section class="section">
+    <h2 data-i18n="features-title">EbookForge가 해결하는 문제</h2>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <h3 data-i18n="feature1-title">✔ AI 기반 자동 목차 생성</h3>
+        <p data-i18n="feature1-desc">주제만 넣으면 완성된 목차가 자동으로 생성됩니다.</p>
+      </div>
+      <div class="feature">
+        <h3 data-i18n="feature2-title">✔ 챕터별 초안 자동 생성</h3>
+        <p data-i18n="feature2-desc">AI 글티가 나는 텍스트가 아니라, 사용자의 스타일을 반영한 자연스러운 글을 생성합니다.</p>
+      </div>
+      <div class="feature">
+        <h3 data-i18n="feature3-title">✔ 자동 포맷팅 & 정리</h3>
+        <p data-i18n="feature3-desc">전자책 구조에 맞게 내용이 자동 정리되고, EPUB/PDF 초안도 준비됩니다.</p>
+      </div>
+      <div class="feature">
+        <h3 data-i18n="feature4-title">✔ 표지 이미지 자동 생성</h3>
+        <p data-i18n="feature4-desc">전문 디자이너 수준의 전자책 표지를 AI가 자동 제작합니다.</p>
+      </div>
+      <div class="feature">
+        <h3 data-i18n="feature5-title">✔ 플랫폼별 출판 가이드</h3>
+        <p data-i18n="feature5-desc">리디북스, Kindle, Kobo 등 플랫폼에 맞는 출판 가이드를 자동 생성합니다.</p>
+      </div>
+      <div class="feature">
+        <h3 data-i18n="feature6-title">✔ 초보자 중심 설계</h3>
+        <p data-i18n="feature6-desc">전문가가 아니라 '첫 전자책을 만들려는 사람'을 위한 도구입니다.</p>
+      </div>
     </div>
-</body>
+  </section>
 
+  <!-- CTA -->
+  <section class="section">
+    <h2 data-i18n="cta-title">가장 먼저 사용하고 싶다면?</h2>
+    <p data-i18n="cta-desc">출시와 동시에 얼리버드를 가장 먼저 안내받을 수 있습니다.</p>
+
+    <div class="cta-box">
+      <form action="YOUR_MAILERLITE_FORM_URL" method="POST">
+        <input type="email" name="email" data-i18n-placeholder="email-placeholder" placeholder="이메일 주소" required>
+        <br>
+        <button type="submit" data-i18n="notify-button">출시 알림 받기</button>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+<footer data-i18n="footer">
+  © 2025 EbookForge — Built by a developer who wanted to make writing easier for everyone.
+</footer>
+
+<script>
+  // 다국어 번역 데이터
+  const translations = {
+    ko: {
+      'tagline': '"전자책을 한 번도 써본 적 없는 사람도<br>1시간 안에 첫 전자책을 완성하도록"',
+      'email-prompt': '출시 알림을 받고 싶은 이메일을 입력하세요',
+      'email-placeholder': '이메일 주소',
+      'notify-button': '출시 알림 받기',
+      'why-title': '왜 EbookForge를 만들었나요?',
+      'why-p1': '저는 전자책으로 돈을 벌어본 적이 없습니다.<br>하지만, 오히려 그게 제가 이 도구를 만들게 된 가장 큰 이유였습니다.',
+      'why-p2': '처음 전자책을 만들고 싶을 때, 가장 힘든 점은<br>"어디서부터 시작해야 할지 모른다"는 것이었습니다.<br>목차도 어렵고, 챕터 구성도 어렵고, 글쓰기 자체가 막막하죠.',
+      'why-p3': '그래서 생각했습니다.<br><strong>"전자책을 많이 써본 전문가가 아니라,<br>전자책을 처음 만들고자 하는 사람의 입장에서<br>모든 과정을 자동화할 수는 없을까?"</strong>',
+      'why-p4': 'EbookForge는 바로 그런 문제를 해결하기 위해 시작했습니다.',
+      'features-title': 'EbookForge가 해결하는 문제',
+      'feature1-title': '✔ AI 기반 자동 목차 생성',
+      'feature1-desc': '주제만 넣으면 완성된 목차가 자동으로 생성됩니다.',
+      'feature2-title': '✔ 챕터별 초안 자동 생성',
+      'feature2-desc': 'AI 글티가 나는 텍스트가 아니라, 사용자의 스타일을 반영한 자연스러운 글을 생성합니다.',
+      'feature3-title': '✔ 자동 포맷팅 & 정리',
+      'feature3-desc': '전자책 구조에 맞게 내용이 자동 정리되고, EPUB/PDF 초안도 준비됩니다.',
+      'feature4-title': '✔ 표지 이미지 자동 생성(개발예정)',
+      'feature4-desc': '전문 디자이너 수준의 전자책 표지를 AI가 자동 제작합니다.',
+      'feature5-title': '✔ 플랫폼별 출판 가이드(개발예정)',
+      'feature5-desc': '리디북스, Kindle, Kobo 등 플랫폼에 맞는 출판 가이드를 자동 생성합니다.',
+      'feature6-title': '✔ 초보자 중심 설계(개발예정)',
+      'feature6-desc': '전문가가 아니라 \'첫 전자책을 만들려는 사람\'을 위한 도구입니다.',
+      'cta-title': '가장 먼저 사용하고 싶다면?',
+      'cta-desc': '출시와 동시에 얼리버드를 가장 먼저 안내받을 수 있습니다.',
+      'footer': '© 2025 EbookForge — 모든 사람이 글쓰기를 더 쉽게 할 수 있도록 개발자가 만든 도구입니다.'
+    },
+    zh: {
+      'tagline': '"即使是从未写过电子书的人<br>也能在1小时内完成第一本电子书"',
+      'email-prompt': '请输入您想接收发布通知的电子邮件',
+      'email-placeholder': '电子邮件地址',
+      'notify-button': '接收发布通知',
+      'why-title': '为什么创建EbookForge？',
+      'why-p1': '我从未通过电子书赚过钱。<br>但正是这一点，成为我创建这个工具的最大原因。',
+      'why-p2': '当我想第一次制作电子书时，最困难的是<br>"不知道从哪里开始"。<br>目录很难，章节构成很难，写作本身也很茫然。',
+      'why-p3': '所以我想了想。<br><strong>"不是从写过很多电子书的专家角度，<br>而是从想第一次制作电子书的人的角度，<br>能否将整个过程自动化？"</strong>',
+      'why-p4': 'EbookForge正是为了解决这样的问题而开始的。',
+      'features-title': 'EbookForge解决的问题',
+      'feature1-title': '✔ AI自动生成目录',
+      'feature1-desc': '只需输入主题，即可自动生成完整的目录。',
+      'feature2-title': '✔ 章节草稿自动生成',
+      'feature2-desc': '不是AI味十足的文本，而是生成反映用户风格的自然文章。',
+      'feature3-title': '✔ 自动格式化与整理',
+      'feature3-desc': '内容会自动整理成电子书结构，并准备EPUB/PDF草稿。',
+      'feature4-title': '✔ 封面图像自动生成(开发中)',
+      'feature4-desc': 'AI自动制作专业设计师水平的电子书封面。',
+      'feature5-title': '✔ 平台特定发布指南(开发中)',
+      'feature5-desc': '自动生成适合Ridibooks、Kindle、Kobo等平台的发布指南。',
+      'feature6-title': '✔ 面向初学者的设计(开发中)',
+      'feature6-desc': '这是为"想制作第一本电子书的人"而不是专家设计的工具。',
+      'cta-title': '想最先使用吗？',
+      'cta-desc': '发布时，您可以最先收到早鸟通知。',
+      'footer': '© 2025 EbookForge — 由希望让每个人都能更轻松写作的开发者打造。'
+    },
+    ja: {
+      'tagline': '"電子書籍を一度も書いたことがない人でも<br>1時間以内に最初の電子書籍を完成できるように"',
+      'email-prompt': 'リリース通知を受け取りたいメールアドレスを入力してください',
+      'email-placeholder': 'メールアドレス',
+      'notify-button': 'リリース通知を受け取る',
+      'why-title': 'なぜEbookForgeを作ったのですか？',
+      'why-p1': '私は電子書籍でお金を稼いだことがありません。<br>しかし、それが私がこのツールを作った最大の理由でした。',
+      'why-p2': '初めて電子書籍を作りたいと思ったとき、最も困難だったのは<br>"どこから始めればいいかわからない"ということでした。<br>目次も難しく、章構成も難しく、文章を書くこと自体が途方に暮れます。',
+      'why-p3': 'そこで考えました。<br><strong>"電子書籍をたくさん書いた専門家ではなく、<br>初めて電子書籍を作ろうとする人の立場から、<br>すべてのプロセスを自動化できないか？"</strong>',
+      'why-p4': 'EbookForgeは、まさにそのような問題を解決するために始まりました。',
+      'features-title': 'EbookForgeが解決する問題',
+      'feature1-title': '✔ AIベースの自動目次生成',
+      'feature1-desc': 'テーマを入力するだけで、完成した目次が自動生成されます。',
+      'feature2-title': '✔ 章ごとの草稿自動生成',
+      'feature2-desc': 'AI臭いテキストではなく、ユーザーのスタイルを反映した自然な文章を生成します。',
+      'feature3-title': '✔ 自動フォーマット＆整理',
+      'feature3-desc': '電子書籍の構造に合わせて内容が自動整理され、EPUB/PDFの草稿も準備されます。',
+      'feature4-title': '✔ 表紙画像自動生成(開発予定)',
+      'feature4-desc': 'プロのデザイナーレベルの電子書籍表紙をAIが自動制作します。',
+      'feature5-title': '✔ プラットフォーム別出版ガイド(開発予定)',
+      'feature5-desc': 'Ridibooks、Kindle、Koboなどのプラットフォームに合わせた出版ガイドを自動生成します。',
+      'feature6-title': '✔ 初心者中心の設計(開発予定)',
+      'feature6-desc': '専門家ではなく、「最初の電子書籍を作ろうとする人」のためのツールです。',
+      'cta-title': '最も早く使いたいですか？',
+      'cta-desc': 'リリースと同時に、アーリーバードを最も早く案内できます。',
+      'footer': '© 2025 EbookForge — 誰もがより簡単に書けるようにしたい開発者が作ったツール。'
+    },
+    en: {
+      'tagline': '"Even those who have never written an ebook<br>can complete their first ebook within 1 hour"',
+      'email-prompt': 'Enter the email address where you want to receive launch notifications',
+      'email-placeholder': 'Email address',
+      'notify-button': 'Get launch notification',
+      'why-title': 'Why did we create EbookForge?',
+      'why-p1': 'I have never made money from ebooks.<br>But that was actually the biggest reason why I created this tool.',
+      'why-p2': 'When I first wanted to create an ebook, the hardest part was<br>"not knowing where to start."<br>The table of contents was difficult, chapter structure was difficult, and writing itself was overwhelming.',
+      'why-p3': 'So I thought.<br><strong>"Instead of from the perspective of an expert who has written many ebooks,<br>from the perspective of someone who wants to create their first ebook,<br>can we automate the entire process?"</strong>',
+      'why-p4': 'EbookForge started to solve exactly that problem.',
+      'features-title': 'Problems EbookForge Solves',
+      'feature1-title': '✔ AI-based automatic table of contents generation',
+      'feature1-desc': 'Just enter a topic and a complete table of contents is automatically generated.',
+      'feature2-title': '✔ Automatic chapter draft generation',
+      'feature2-desc': 'Generates natural text that reflects the user\'s style, not AI-sounding text.',
+      'feature3-title': '✔ Automatic formatting & organization',
+      'feature3-desc': 'Content is automatically organized to fit ebook structure, and EPUB/PDF drafts are prepared.',
+      'feature4-title': '✔ Automatic cover image generation (Coming Soon)',
+      'feature4-desc': 'AI automatically creates professional designer-level ebook covers.',
+      'feature5-title': '✔ Platform-specific publishing guides (Coming Soon)',
+      'feature5-desc': 'Automatically generates publishing guides tailored to platforms like Ridibooks, Kindle, and Kobo.',
+      'feature6-title': '✔ Beginner-focused design (Coming Soon)',
+      'feature6-desc': 'A tool for "people who want to create their first ebook," not experts.',
+      'cta-title': 'Want to use it first?',
+      'cta-desc': 'You can be the first to receive early bird notifications when we launch.',
+      'footer': '© 2025 EbookForge — Built by a developer who wanted to make writing easier for everyone.'
+    },
+    de: {
+      'tagline': '"Selbst diejenigen, die noch nie ein E-Book geschrieben haben,<br>können ihr erstes E-Book innerhalb von 1 Stunde fertigstellen"',
+      'email-prompt': 'Geben Sie die E-Mail-Adresse ein, an die Sie Launch-Benachrichtigungen erhalten möchten',
+      'email-placeholder': 'E-Mail-Adresse',
+      'notify-button': 'Launch-Benachrichtigung erhalten',
+      'why-title': 'Warum haben wir EbookForge erstellt?',
+      'why-p1': 'Ich habe noch nie Geld mit E-Books verdient.<br>Aber das war tatsächlich der größte Grund, warum ich dieses Tool erstellt habe.',
+      'why-p2': 'Als ich zum ersten Mal ein E-Book erstellen wollte, war das Schwierigste,<br>"nicht zu wissen, wo ich anfangen soll."<br>Das Inhaltsverzeichnis war schwierig, die Kapitelstruktur war schwierig, und das Schreiben selbst war überwältigend.',
+      'why-p3': 'Also dachte ich.<br><strong>"Anstatt aus der Perspektive eines Experten, der viele E-Books geschrieben hat,<br>aus der Perspektive von jemandem, der sein erstes E-Book erstellen möchte,<br>können wir den gesamten Prozess automatisieren?"</strong>',
+      'why-p4': 'EbookForge wurde gegründet, um genau dieses Problem zu lösen.',
+      'features-title': 'Probleme, die EbookForge löst',
+      'feature1-title': '✔ KI-basierte automatische Inhaltsverzeichnis-Generierung',
+      'feature1-desc': 'Geben Sie einfach ein Thema ein und ein vollständiges Inhaltsverzeichnis wird automatisch generiert.',
+      'feature2-title': '✔ Automatische Kapitel-Entwurfsgenerierung',
+      'feature2-desc': 'Generiert natürlichen Text, der den Stil des Benutzers widerspiegelt, nicht KI-klingenden Text.',
+      'feature3-title': '✔ Automatische Formatierung & Organisation',
+      'feature3-desc': 'Inhalte werden automatisch an die E-Book-Struktur angepasst und EPUB/PDF-Entwürfe werden vorbereitet.',
+      'feature4-title': '✔ Automatische Cover-Bildgenerierung (In Entwicklung)',
+      'feature4-desc': 'KI erstellt automatisch E-Book-Cover auf professionellem Designer-Niveau.',
+      'feature5-title': '✔ Plattformspezifische Veröffentlichungsleitfäden (In Entwicklung)',
+      'feature5-desc': 'Generiert automatisch Veröffentlichungsleitfäden für Plattformen wie Ridibooks, Kindle und Kobo.',
+      'feature6-title': '✔ Anfängerorientiertes Design (In Entwicklung)',
+      'feature6-desc': 'Ein Tool für "Menschen, die ihr erstes E-Book erstellen möchten", nicht für Experten.',
+      'cta-title': 'Möchten Sie es zuerst verwenden?',
+      'cta-desc': 'Sie können als Erster Early-Bird-Benachrichtigungen erhalten, wenn wir starten.',
+      'footer': '© 2025 EbookForge — Entwickelt von einem Entwickler, der das Schreiben für alle einfacher machen wollte.'
+    }
+  };
+
+  // 현재 언어 가져오기 (localStorage 또는 기본값)
+  let currentLang = localStorage.getItem('selectedLanguage') || 'ko';
+
+  // 언어 변경 함수
+  function changeLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('selectedLanguage', lang);
+    
+    // HTML lang 속성 업데이트
+    document.documentElement.lang = lang;
+    
+    // 모든 번역 요소 업데이트
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      const key = element.getAttribute('data-i18n');
+      if (translations[lang] && translations[lang][key]) {
+        element.innerHTML = translations[lang][key];
+      }
+    });
+    
+    // placeholder 업데이트
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+      const key = element.getAttribute('data-i18n-placeholder');
+      if (translations[lang] && translations[lang][key]) {
+        element.placeholder = translations[lang][key];
+      }
+    });
+    
+    // 언어 버튼 활성화 상태 업데이트
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      if (btn.getAttribute('data-lang') === lang) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  // 페이지 로드 시 저장된 언어 적용
+  document.addEventListener('DOMContentLoaded', () => {
+    changeLanguage(currentLang);
+  });
+</script>
+
+</body>
 </html>
