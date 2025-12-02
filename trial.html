@@ -423,10 +423,79 @@
 
         <form id="trial-form">
             <div class="survey-container">
-                <!-- 카드 1: 이름 -->
+                <!-- 카드 1: 개인정보 수집 동의 -->
                 <div class="survey-card active" data-step="1">
                     <div class="card-header">
                         <div class="card-progress">1 / 12</div>
+                        <h2 class="card-title">개인정보 수집 및 이용 동의</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="notice-section" style="margin-top: 0">
+                            <p>
+                                본 설문을 통해 수집된 정보(이름, 이메일 등)는
+                                <strong>EbookForge Trial License 발급 및 기능 개선 목적</strong>으로만 사용되며, 사용자의 동의 없이 제3자에게 제공되지 않습니다.
+                            </p>
+                            <p>
+                                이메일 주소는 Trial License 발송 및 향후 업데이트 안내에 활용될 수 있습니다. 원하실 경우 언제든지 수신 거부가 가능합니다.
+                            </p>
+                        </div>
+                        <div class="checkbox-item" style="margin-top: 16px">
+                            <input type="checkbox" id="privacy-consent" name="privacy-consent" value="yes" required />
+                            <label for="privacy-consent">
+                  개인정보 수집 및 이용에 동의합니다.
+                  <span class="required">*</span>
+                </label>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 2: Trial 약관 동의 -->
+                <div class="survey-card" data-step="2">
+                    <div class="card-header">
+                        <div class="card-progress">2 / 12</div>
+                        <h2 class="card-title">Trial 라이센스 조건 동의</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="notice-section" style="margin-top: 0">
+                            <h3>Trial 라이센스 조건</h3>
+                            <ul>
+                                <li>라이센스는 <strong>12월 10일까지 사용 가능</strong></li>
+                                <li>20회 사용 제한</li>
+                                <li>비상업적 용도에서 자유롭게 테스트 가능</li>
+                                <li>Trial 결과물의 상업적 출판도 가능</li>
+                            </ul>
+                            <h3 style="margin-top: 16px">책임 제한 고지</h3>
+                            <p>
+                                Trial 버전 사용 중 발생하는 데이터 손실 또는 출력물 오류에 대해서는 개발자는 법적 책임을 지지 않습니다.
+                            </p>
+                        </div>
+                        <div class="checkbox-item" style="margin-top: 16px">
+                            <input type="checkbox" id="trial-consent" name="trial-consent" value="yes" required />
+                            <label for="trial-consent">
+                  Trial 라이센스 조건 및 책임 제한 고지에 동의합니다.
+                  <span class="required">*</span>
+                </label>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 3: 이름 -->
+                <div class="survey-card" data-step="3">
+                    <div class="card-header">
+                        <div class="card-progress">3 / 12</div>
                         <h2 class="card-title">기본 정보</h2>
                         <p class="card-description">라이센스 발급을 위한 필수 정보입니다.</p>
                     </div>
@@ -440,16 +509,19 @@
                         </div>
                     </div>
                     <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
                         <button type="button" class="btn btn-primary" onclick="nextStep()">
                 다음
               </button>
                     </div>
                 </div>
 
-                <!-- 카드 2: 이메일 -->
-                <div class="survey-card" data-step="2">
+                <!-- 카드 4: 이메일 -->
+                <div class="survey-card" data-step="4">
                     <div class="card-header">
-                        <div class="card-progress">2 / 12</div>
+                        <div class="card-progress">4 / 12</div>
                         <h2 class="card-title">이메일 주소</h2>
                         <p class="card-description">
                             라이센스가 발송될 이메일 주소를 입력해주세요.
@@ -474,10 +546,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 3: 전자책 만들려는 목적 -->
-                <div class="survey-card" data-step="3">
+                <!-- 카드 5: 전자책 만들려는 목적 -->
+                <div class="survey-card" data-step="5">
                     <div class="card-header">
-                        <div class="card-progress">3 / 12</div>
+                        <div class="card-progress">5 / 12</div>
                         <h2 class="card-title">전자책 만들려는 목적</h2>
                         <p class="card-description">복수 선택 가능합니다.</p>
                     </div>
@@ -524,10 +596,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 4: 기대 기능 -->
-                <div class="survey-card" data-step="4">
+                <!-- 카드 6: 기대 기능 -->
+                <div class="survey-card" data-step="6">
                     <div class="card-header">
-                        <div class="card-progress">4 / 12</div>
+                        <div class="card-progress">6 / 12</div>
                         <h2 class="card-title">EbookForge의 어떤 기능이 가장 기대되나요?</h2>
                     </div>
                     <div class="form-group">
@@ -569,10 +641,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 5: 전자책 제작 경험 -->
-                <div class="survey-card" data-step="5">
+                <!-- 카드 7: 전자책 제작 경험 -->
+                <div class="survey-card" data-step="7">
                     <div class="card-header">
-                        <div class="card-progress">5 / 12</div>
+                        <div class="card-progress">7 / 12</div>
                         <h2 class="card-title">전자책 제작 경험이 있나요?</h2>
                     </div>
                     <div class="form-group">
@@ -603,10 +675,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 6: 불편했던 점 -->
-                <div class="survey-card" data-step="6">
+                <!-- 카드 8: 불편했던 점 -->
+                <div class="survey-card" data-step="8">
                     <div class="card-header">
-                        <div class="card-progress">6 / 12</div>
+                        <div class="card-progress">8 / 12</div>
                         <h2 class="card-title">현재 가장 불편했던 점은 무엇인가요?</h2>
                         <p class="card-description">복수 선택 가능합니다.</p>
                     </div>
@@ -649,10 +721,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 7: 유료로 쓰고 싶은 기능 -->
-                <div class="survey-card" data-step="7">
+                <!-- 카드 9: 유료로 쓰고 싶은 기능 -->
+                <div class="survey-card" data-step="9">
                     <div class="card-header">
-                        <div class="card-progress">7 / 12</div>
+                        <div class="card-progress">9 / 12</div>
                         <h2 class="card-title">
                             향후 어떤 기능이 추가되면 유료로 사용하고 싶나요?
                         </h2>
@@ -705,10 +777,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 8: 사용 OS -->
-                <div class="survey-card" data-step="8">
+                <!-- 카드 10: 사용 OS -->
+                <div class="survey-card" data-step="10">
                     <div class="card-header">
-                        <div class="card-progress">8 / 12</div>
+                        <div class="card-progress">10 / 12</div>
                         <h2 class="card-title">현재 어떤 OS에서 사용할 예정인가요?</h2>
                     </div>
                     <div class="form-group">
@@ -746,10 +818,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 9: SNS 계정 -->
-                <div class="survey-card" data-step="9">
+                <!-- 카드 11: SNS 계정 -->
+                <div class="survey-card" data-step="11">
                     <div class="card-header">
-                        <div class="card-progress">9 / 12</div>
+                        <div class="card-progress">11 / 12</div>
                         <h2 class="card-title">SNS 계정 (선택)</h2>
                         <p class="card-description">
                             커뮤니티 강화 및 후기 요청용입니다. Threads 링크를 입력해주세요.
@@ -769,10 +841,10 @@
                     </div>
                 </div>
 
-                <!-- 카드 10: 라이센스 전달 방식 확인 -->
-                <div class="survey-card" data-step="10">
+                <!-- 카드 12: 라이센스 전달 방식 확인 -->
+                <div class="survey-card" data-step="12">
                     <div class="card-header">
-                        <div class="card-progress">10 / 12</div>
+                        <div class="card-progress">12 / 12</div>
                         <h2 class="card-title">라이센스 전달 방식 확인</h2>
                     </div>
                     <div class="form-group">
@@ -780,78 +852,6 @@
                             <input type="checkbox" id="license-delivery" name="license-delivery" value="yes" required />
                             <label for="license-delivery">
                   Trial License는 제출 후 24시간 이내에 이메일로 발송됩니다.
-                  <span class="required">*</span>
-                </label>
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                이전
-              </button>
-                        <button type="button" class="btn btn-primary" onclick="nextStep()">
-                다음
-              </button>
-                    </div>
-                </div>
-
-                <!-- 카드 11: 개인정보 수집 동의 -->
-                <div class="survey-card" data-step="11">
-                    <div class="card-header">
-                        <div class="card-progress">11 / 12</div>
-                        <h2 class="card-title">개인정보 수집 및 이용 동의</h2>
-                    </div>
-                    <div class="form-group">
-                        <div class="notice-section" style="margin-top: 0">
-                            <p>
-                                본 설문을 통해 수집된 정보(이름, 이메일 등)는
-                                <strong>EbookForge Trial License 발급 및 기능 개선 목적</strong>으로만 사용되며, 사용자의 동의 없이 제3자에게 제공되지 않습니다.
-                            </p>
-                            <p>
-                                이메일 주소는 Trial License 발송 및 향후 업데이트 안내에 활용될 수 있습니다. 원하실 경우 언제든지 수신 거부가 가능합니다.
-                            </p>
-                        </div>
-                        <div class="checkbox-item" style="margin-top: 16px">
-                            <input type="checkbox" id="privacy-consent" name="privacy-consent" value="yes" required />
-                            <label for="privacy-consent">
-                  개인정보 수집 및 이용에 동의합니다.
-                  <span class="required">*</span>
-                </label>
-                        </div>
-                    </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                이전
-              </button>
-                        <button type="button" class="btn btn-primary" onclick="nextStep()">
-                다음
-              </button>
-                    </div>
-                </div>
-
-                <!-- 카드 12: Trial 약관 동의 -->
-                <div class="survey-card" data-step="12">
-                    <div class="card-header">
-                        <div class="card-progress">12 / 12</div>
-                        <h2 class="card-title">Trial 라이센스 조건 동의</h2>
-                    </div>
-                    <div class="form-group">
-                        <div class="notice-section" style="margin-top: 0">
-                            <h3>Trial 라이센스 조건</h3>
-                            <ul>
-                                <li>라이센스는 <strong>12월 10일까지 사용 가능</strong></li>
-                                <li>20회 사용 제한</li>
-                                <li>비상업적 용도에서 자유롭게 테스트 가능</li>
-                                <li>Trial 결과물의 상업적 출판도 가능</li>
-                            </ul>
-                            <h3 style="margin-top: 16px">책임 제한 고지</h3>
-                            <p>
-                                Trial 버전 사용 중 발생하는 데이터 손실 또는 출력물 오류에 대해서는 개발자는 법적 책임을 지지 않습니다.
-                            </p>
-                        </div>
-                        <div class="checkbox-item" style="margin-top: 16px">
-                            <input type="checkbox" id="trial-consent" name="trial-consent" value="yes" required />
-                            <label for="trial-consent">
-                  Trial 라이센스 조건 및 책임 제한 고지에 동의합니다.
                   <span class="required">*</span>
                 </label>
                         </div>
@@ -927,6 +927,19 @@
 
             // 필수 입력 필드 검사
             if (currentStep === 1) {
+                // 개인정보 수집 동의
+                if (!$("#privacy-consent").is(":checked")) {
+                    isValid = false;
+                    alert("개인정보 수집 및 이용에 동의해주세요.");
+                }
+            } else if (currentStep === 2) {
+                // Trial 약관 동의
+                if (!$("#trial-consent").is(":checked")) {
+                    isValid = false;
+                    alert("Trial 라이센스 조건에 동의해주세요.");
+                }
+            } else if (currentStep === 3) {
+                // 이름
                 const name = $("#name").val().trim();
                 if (!name) {
                     $("#name-error").addClass("show");
@@ -934,7 +947,8 @@
                 } else {
                     $("#name-error").removeClass("show");
                 }
-            } else if (currentStep === 2) {
+            } else if (currentStep === 4) {
+                // 이메일
                 const email = $("#email").val().trim();
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!email || !emailRegex.test(email)) {
@@ -943,20 +957,11 @@
                 } else {
                     $("#email-error").removeClass("show");
                 }
-            } else if (currentStep === 10) {
+            } else if (currentStep === 12) {
+                // 라이센스 전달 방식 확인
                 if (!$("#license-delivery").is(":checked")) {
                     isValid = false;
                     alert("라이센스 전달 방식을 확인해주세요.");
-                }
-            } else if (currentStep === 11) {
-                if (!$("#privacy-consent").is(":checked")) {
-                    isValid = false;
-                    alert("개인정보 수집 및 이용에 동의해주세요.");
-                }
-            } else if (currentStep === 12) {
-                if (!$("#trial-consent").is(":checked")) {
-                    isValid = false;
-                    alert("Trial 라이센스 조건에 동의해주세요.");
                 }
             }
 
