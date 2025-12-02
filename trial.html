@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EbookForge 체험 라이센스 신청서</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+         :root {
+            --bg: #050816;
+            --bg-soft: #0b1120;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.12);
+            --accent-strong: #0ea5e9;
+            --text-main: #e5e7eb;
+            --text-soft: #9ca3af;
+            --text-mute: #6b7280;
+            --danger: #f97373;
+            --border-subtle: #1f2937;
+            --radius-xl: 18px;
+            --radius-2xl: 24px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient( circle at top, #0b1120, #020617 55%, #000 100%);
+            color: var(--text-main);
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+        
+        body {
+            line-height: 1.6;
+        }
+        
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 32px 20px 64px;
+        }
+        
+        header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .logo-mark {
+            width: 30px;
+            height: 30px;
+            border-radius: 10px;
+            background: radial-gradient( circle at 20% 0, #e0f2fe, #38bdf8 40%, #0f172a 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #0b1120;
+            box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35), 0 10px 30px rgba(15, 23, 42, 0.7);
+        }
+        
+        .title-section {
+            border-radius: var(--radius-2xl);
+            background: radial-gradient( circle at top left, rgba(56, 189, 248, 0.12), rgba(15, 23, 42, 0.96));
+            box-shadow: 0 18px 60px rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .title-section h1 {
+            font-size: clamp(22px, 3vw, 28px);
+            line-height: 1.3;
+            margin: 0 0 12px;
+            letter-spacing: -0.02em;
+            color: var(--text-main);
+        }
+        
+        .title-section .subtitle {
+            font-size: 13px;
+            color: var(--text-mute);
+            margin-bottom: 16px;
+        }
+        
+        .title-section .description {
+            font-size: 14px;
+            color: var(--text-soft);
+            line-height: 1.6;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        
+        .title-section .description strong {
+            color: var(--accent);
+        }
+        /* 설문 카드 컨테이너 */
+        
+        .survey-container {
+            position: relative;
+            min-height: 400px;
+        }
+        
+        .survey-card {
+            display: none;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            background: radial-gradient( circle at top left, rgba(148, 163, 184, 0.12), rgba(15, 23, 42, 0.95));
+            padding: 24px;
+            box-shadow: 0 18px 60px rgba(15, 23, 42, 0.85);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .survey-card.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .card-header {
+            margin-bottom: 20px;
+        }
+        
+        .card-progress {
+            font-size: 11px;
+            color: var(--text-mute);
+            margin-bottom: 8px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0 0 8px;
+        }
+        
+        .card-description {
+            font-size: 13px;
+            color: var(--text-soft);
+            margin: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+        
+        .form-label .required {
+            color: var(--danger);
+            margin-left: 4px;
+        }
+        
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-main);
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: var(--accent);
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: rgba(15, 23, 42, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .checkbox-item:hover,
+        .radio-item:hover {
+            border-color: var(--accent);
+            background: rgba(56, 189, 248, 0.08);
+        }
+        
+        .checkbox-item input[type="checkbox"],
+        .checkbox-item input[type="radio"],
+        .radio-item input[type="radio"] {
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+        
+        .checkbox-item label,
+        .radio-item label {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-main);
+            cursor: pointer;
+            margin: 0;
+        }
+        
+        .checkbox-item input[type="text"],
+        .radio-item input[type="text"] {
+            margin-top: 8px;
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-main);
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+        }
+        
+        .conditional-input {
+            display: none;
+            margin-top: 10px;
+            padding-left: 28px;
+        }
+        
+        .conditional-input.show {
+            display: block;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            justify-content: flex-end;
+        }
+        
+        .btn {
+            border-radius: 999px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9, #22c55e);
+            color: #0b1120;
+            box-shadow: 0 12px 35px rgba(8, 47, 73, 0.7);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(8, 47, 73, 0.8);
+        }
+        
+        .btn-secondary {
+            background: rgba(15, 23, 42, 0.85);
+            color: var(--text-soft);
+            border: 1px solid rgba(148, 163, 184, 0.7);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--text-main);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .notice-section {
+            margin-top: 32px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(31, 41, 55, 0.9);
+            background: rgba(15, 23, 42, 0.95);
+            padding: 20px;
+            font-size: 12px;
+            color: var(--text-soft);
+        }
+        
+        .notice-section h3 {
+            font-size: 14px;
+            color: var(--text-main);
+            margin: 0 0 12px;
+        }
+        
+        .notice-section p {
+            margin: 0 0 10px;
+            line-height: 1.6;
+        }
+        
+        .notice-section ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        .notice-section li {
+            margin-bottom: 6px;
+        }
+        
+        .error-message {
+            color: var(--danger);
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(34, 197, 94, 0.5);
+            background: radial-gradient( circle at top left, rgba(34, 197, 94, 0.12), rgba(15, 23, 42, 0.95));
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        .success-message h2 {
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        
+        .success-message p {
+            color: var(--text-soft);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 640px) {
+            .page {
+                padding: 20px 16px 40px;
+            }
+            .survey-card {
+                padding: 20px;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <header>
+            <div class="logo">
+                <div class="logo-mark">E</div>
+                <div>EbookForge</div>
+            </div>
+        </header>
+
+        <div class="title-section">
+            <h1>EbookForge 체험 라이센스 신청서</h1>
+            <div class="subtitle">무료 20회 사용권 (※ 12월 10일까지 사용 가능)</div>
+            <div class="description">
+                Threads 팔로워 여러분에게만 제공되는 한정 Trial License 입니다.<br /> 아래 정보를 제출해주시면 <strong>EbookForge Trial License(20회)</strong>를 이메일로 발송해드립니다.<br /> 모든 정보는 제품 개선 외의 목적으로 사용되지 않습니다.
+            </div>
+        </div>
+
+        <form id="trial-form">
+            <div class="survey-container">
+                <!-- 카드 1: 이름 -->
+                <div class="survey-card active" data-step="1">
+                    <div class="card-header">
+                        <div class="card-progress">1 / 12</div>
+                        <h2 class="card-title">기본 정보</h2>
+                        <p class="card-description">라이센스 발급을 위한 필수 정보입니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="name">
+                이름 <span class="required">*</span>
+              </label>
+                        <input type="text" id="name" name="name" class="form-input" required placeholder="성명을 입력해주세요" />
+                        <div class="error-message" id="name-error">
+                            이름을 입력해주세요.
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 2: 이메일 -->
+                <div class="survey-card" data-step="2">
+                    <div class="card-header">
+                        <div class="card-progress">2 / 12</div>
+                        <h2 class="card-title">이메일 주소</h2>
+                        <p class="card-description">
+                            라이센스가 발송될 이메일 주소를 입력해주세요.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="email">
+                이메일 주소 <span class="required">*</span>
+              </label>
+                        <input type="email" id="email" name="email" class="form-input" required placeholder="example@email.com" />
+                        <div class="error-message" id="email-error">
+                            올바른 이메일 주소를 입력해주세요.
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 3: 전자책 만들려는 목적 -->
+                <div class="survey-card" data-step="3">
+                    <div class="card-header">
+                        <div class="card-progress">3 / 12</div>
+                        <h2 class="card-title">전자책 만들려는 목적</h2>
+                        <p class="card-description">복수 선택 가능합니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group" id="purpose-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="purpose-1" name="purpose" value="개인 출판(자기계발/에세이)" />
+                                <label for="purpose-1">개인 출판(자기계발/에세이)</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="purpose-2" name="purpose" value="비즈니스/마케팅 목적" />
+                                <label for="purpose-2">비즈니스/마케팅 목적</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="purpose-3" name="purpose" value="강의/교육자료 제작" />
+                                <label for="purpose-3">강의/교육자료 제작</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="purpose-4" name="purpose" value="블로그·SNS 콘텐츠 확장" />
+                                <label for="purpose-4">블로그·SNS 콘텐츠 확장</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="purpose-5" name="purpose" value="출판사/에이전시 업무" />
+                                <label for="purpose-5">출판사/에이전시 업무</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="purpose-6" name="purpose" value="실험적으로 사용해보려고" />
+                                <label for="purpose-6">실험적으로 사용해보려고</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="purpose-7" name="purpose" value="기타" />
+                                <label for="purpose-7">기타</label>
+                                <input type="text" class="conditional-input" id="purpose-other" name="purpose-other" placeholder="직접 입력해주세요" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 4: 기대 기능 -->
+                <div class="survey-card" data-step="4">
+                    <div class="card-header">
+                        <div class="card-progress">4 / 12</div>
+                        <h2 class="card-title">EbookForge의 어떤 기능이 가장 기대되나요?</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="radio-group" id="expected-feature-group">
+                            <div class="radio-item">
+                                <input type="radio" id="feature-1" name="expected-feature" value="자동 목차 생성" />
+                                <label for="feature-1">자동 목차 생성</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="feature-2" name="expected-feature" value="전체 책 자동 생성(챕터 생성)" />
+                                <label for="feature-2">전체 책 자동 생성(챕터 생성)</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="feature-3" name="expected-feature" value="EPUB/PDF 자동 출력" />
+                                <label for="feature-3">EPUB/PDF 자동 출력</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="feature-4" name="expected-feature" value="스타일 템플릿" />
+                                <label for="feature-4">스타일 템플릿</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="feature-5" name="expected-feature" value="일본어/한국어 등 다국어 지원" />
+                                <label for="feature-5">일본어/한국어 등 다국어 지원</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="feature-6" name="expected-feature" value="기타" />
+                                <label for="feature-6">기타</label>
+                                <input type="text" class="conditional-input" id="feature-other" name="feature-other" placeholder="직접 입력해주세요" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 5: 전자책 제작 경험 -->
+                <div class="survey-card" data-step="5">
+                    <div class="card-header">
+                        <div class="card-progress">5 / 12</div>
+                        <h2 class="card-title">전자책 제작 경험이 있나요?</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="radio-group" id="experience-group">
+                            <div class="radio-item">
+                                <input type="radio" id="experience-yes" name="has-experience" value="yes" />
+                                <label for="experience-yes">네</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="experience-no" name="has-experience" value="no" />
+                                <label for="experience-no">아니오</label>
+                            </div>
+                        </div>
+                        <div class="conditional-input" id="experience-tools-wrapper">
+                            <label class="form-label" for="experience-tools">
+                  어떤 도구를 사용했나요?
+                </label>
+                            <input type="text" id="experience-tools" name="experience-tools" class="form-input" placeholder="예: Adobe InDesign, Canva, Word 등" />
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 6: 불편했던 점 -->
+                <div class="survey-card" data-step="6">
+                    <div class="card-header">
+                        <div class="card-progress">6 / 12</div>
+                        <h2 class="card-title">현재 가장 불편했던 점은 무엇인가요?</h2>
+                        <p class="card-description">복수 선택 가능합니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group" id="pain-point-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pain-1" name="pain-point" value="글쓰기 시간 부족" />
+                                <label for="pain-1">글쓰기 시간 부족</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pain-2" name="pain-point" value="전체 구조 설계 어려움" />
+                                <label for="pain-2">전체 구조 설계 어려움</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pain-3" name="pain-point" value="챕터마다 흐름 유지 어려움" />
+                                <label for="pain-3">챕터마다 흐름 유지 어려움</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pain-4" name="pain-point" value="PDF/EPUB 제작이 어려움" />
+                                <label for="pain-4">PDF/EPUB 제작이 어려움</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pain-5" name="pain-point" value="표지 제작 어려움" />
+                                <label for="pain-5">표지 제작 어려움</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="pain-6" name="pain-point" value="기타" />
+                                <label for="pain-6">기타</label>
+                                <input type="text" class="conditional-input" id="pain-other" name="pain-other" placeholder="직접 입력해주세요" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 7: 유료로 쓰고 싶은 기능 -->
+                <div class="survey-card" data-step="7">
+                    <div class="card-header">
+                        <div class="card-progress">7 / 12</div>
+                        <h2 class="card-title">
+                            향후 어떤 기능이 추가되면 유료로 사용하고 싶나요?
+                        </h2>
+                        <p class="card-description">복수 선택 가능합니다.</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group" id="paid-feature-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-1" name="paid-feature" value="자동 표지 생성" />
+                                <label for="paid-1">자동 표지 생성</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-2" name="paid-feature" value="자동 이미지 생성 삽입" />
+                                <label for="paid-2">자동 이미지 생성 삽입</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-3" name="paid-feature" value="100% 일본어/영어 자연스러운 문체 지원" />
+                                <label for="paid-3">100% 일본어/영어 자연스러운 문체 지원</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-4" name="paid-feature" value="장르별 글쓰기 모드" />
+                                <label for="paid-4">장르별 글쓰기 모드</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-5" name="paid-feature" value="자동 교정/맞춤법 검사" />
+                                <label for="paid-5">자동 교정/맞춤법 검사</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-6" name="paid-feature" value="목차 기반 대량 다중 eBook 생성" />
+                                <label for="paid-6">목차 기반 대량 다중 eBook 생성</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-7" name="paid-feature" value="Notion/GDocs 연동" />
+                                <label for="paid-7">Notion/GDocs 연동</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="paid-8" name="paid-feature" value="기타" />
+                                <label for="paid-8">기타</label>
+                                <input type="text" class="conditional-input" id="paid-other" name="paid-other" placeholder="직접 입력해주세요" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 8: 사용 OS -->
+                <div class="survey-card" data-step="8">
+                    <div class="card-header">
+                        <div class="card-progress">8 / 12</div>
+                        <h2 class="card-title">현재 어떤 OS에서 사용할 예정인가요?</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="radio-group" id="os-group">
+                            <div class="radio-item">
+                                <input type="radio" id="os-windows" name="os" value="Windows" />
+                                <label for="os-windows">Windows</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="os-macos" name="os" value="macOS" />
+                                <label for="os-macos">macOS</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="os-linux" name="os" value="Linux" />
+                                <label for="os-linux">Linux</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="os-android" name="os" value="Android / 모바일" />
+                                <label for="os-android">Android / 모바일</label>
+                            </div>
+                            <div class="radio-item">
+                                <input type="radio" id="os-other" name="os" value="기타" />
+                                <label for="os-other">기타</label>
+                                <input type="text" class="conditional-input" id="os-other-text" name="os-other-text" placeholder="직접 입력해주세요" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 9: SNS 계정 -->
+                <div class="survey-card" data-step="9">
+                    <div class="card-header">
+                        <div class="card-progress">9 / 12</div>
+                        <h2 class="card-title">SNS 계정 (선택)</h2>
+                        <p class="card-description">
+                            커뮤니티 강화 및 후기 요청용입니다. Threads 링크를 입력해주세요.
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="sns-link"> Threads 링크 </label>
+                        <input type="url" id="sns-link" name="sns-link" class="form-input" placeholder="https://threads.net/@username" />
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 10: 라이센스 전달 방식 확인 -->
+                <div class="survey-card" data-step="10">
+                    <div class="card-header">
+                        <div class="card-progress">10 / 12</div>
+                        <h2 class="card-title">라이센스 전달 방식 확인</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="license-delivery" name="license-delivery" value="yes" required />
+                            <label for="license-delivery">
+                  Trial License는 제출 후 24시간 이내에 이메일로 발송됩니다.
+                  <span class="required">*</span>
+                </label>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 11: 개인정보 수집 동의 -->
+                <div class="survey-card" data-step="11">
+                    <div class="card-header">
+                        <div class="card-progress">11 / 12</div>
+                        <h2 class="card-title">개인정보 수집 및 이용 동의</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="notice-section" style="margin-top: 0">
+                            <p>
+                                본 설문을 통해 수집된 정보(이름, 이메일 등)는
+                                <strong>EbookForge Trial License 발급 및 기능 개선 목적</strong>으로만 사용되며, 사용자의 동의 없이 제3자에게 제공되지 않습니다.
+                            </p>
+                            <p>
+                                이메일 주소는 Trial License 발송 및 향후 업데이트 안내에 활용될 수 있습니다. 원하실 경우 언제든지 수신 거부가 가능합니다.
+                            </p>
+                        </div>
+                        <div class="checkbox-item" style="margin-top: 16px">
+                            <input type="checkbox" id="privacy-consent" name="privacy-consent" value="yes" required />
+                            <label for="privacy-consent">
+                  개인정보 수집 및 이용에 동의합니다.
+                  <span class="required">*</span>
+                </label>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                다음
+              </button>
+                    </div>
+                </div>
+
+                <!-- 카드 12: Trial 약관 동의 -->
+                <div class="survey-card" data-step="12">
+                    <div class="card-header">
+                        <div class="card-progress">12 / 12</div>
+                        <h2 class="card-title">Trial 라이센스 조건 동의</h2>
+                    </div>
+                    <div class="form-group">
+                        <div class="notice-section" style="margin-top: 0">
+                            <h3>Trial 라이센스 조건</h3>
+                            <ul>
+                                <li>라이센스는 <strong>12월 10일까지 사용 가능</strong></li>
+                                <li>20회 사용 제한</li>
+                                <li>비상업적 용도에서 자유롭게 테스트 가능</li>
+                                <li>Trial 결과물의 상업적 출판도 가능</li>
+                            </ul>
+                            <h3 style="margin-top: 16px">책임 제한 고지</h3>
+                            <p>
+                                Trial 버전 사용 중 발생하는 데이터 손실 또는 출력물 오류에 대해서는 개발자는 법적 책임을 지지 않습니다.
+                            </p>
+                        </div>
+                        <div class="checkbox-item" style="margin-top: 16px">
+                            <input type="checkbox" id="trial-consent" name="trial-consent" value="yes" required />
+                            <label for="trial-consent">
+                  Trial 라이센스 조건 및 책임 제한 고지에 동의합니다.
+                  <span class="required">*</span>
+                </label>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                이전
+              </button>
+                        <button type="submit" class="btn btn-primary">제출하기</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="success-message" id="success-message">
+            <h2>제출 완료!</h2>
+            <p>
+                신청서가 성공적으로 제출되었습니다.<br /> Trial License는 24시간 이내에 이메일로 발송됩니다.
+            </p>
+        </div>
+
+        <div class="notice-section" style="margin-top: 32px">
+            <h3>추가 안내</h3>
+            <ul>
+                <li>
+                    <strong>협력 인플루언서용 라이센스 아님</strong> - 본 Trial License는 개인 사용자 대상입니다.
+                </li>
+                <li>
+                    <strong>Feedback을 적극 환영</strong> - 사용 중 불편사항이나 개선 제안이 있으시면 언제든지 연락주세요.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 12;
+
+        // 다음 단계로 이동
+        function nextStep() {
+            if (!validateCurrentStep()) {
+                return;
+            }
+
+            if (currentStep < totalSteps) {
+                $(`.survey-card[data-step="${currentStep}"]`).removeClass("active");
+                currentStep++;
+                $(`.survey-card[data-step="${currentStep}"]`).addClass("active");
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        // 이전 단계로 이동
+        function prevStep() {
+            if (currentStep > 1) {
+                $(`.survey-card[data-step="${currentStep}"]`).removeClass("active");
+                currentStep--;
+                $(`.survey-card[data-step="${currentStep}"]`).addClass("active");
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+        }
+
+        // 현재 단계 유효성 검사
+        function validateCurrentStep() {
+            const currentCard = $(`.survey-card[data-step="${currentStep}"]`);
+            let isValid = true;
+
+            // 필수 입력 필드 검사
+            if (currentStep === 1) {
+                const name = $("#name").val().trim();
+                if (!name) {
+                    $("#name-error").addClass("show");
+                    isValid = false;
+                } else {
+                    $("#name-error").removeClass("show");
+                }
+            } else if (currentStep === 2) {
+                const email = $("#email").val().trim();
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email || !emailRegex.test(email)) {
+                    $("#email-error").addClass("show");
+                    isValid = false;
+                } else {
+                    $("#email-error").removeClass("show");
+                }
+            } else if (currentStep === 10) {
+                if (!$("#license-delivery").is(":checked")) {
+                    isValid = false;
+                    alert("라이센스 전달 방식을 확인해주세요.");
+                }
+            } else if (currentStep === 11) {
+                if (!$("#privacy-consent").is(":checked")) {
+                    isValid = false;
+                    alert("개인정보 수집 및 이용에 동의해주세요.");
+                }
+            } else if (currentStep === 12) {
+                if (!$("#trial-consent").is(":checked")) {
+                    isValid = false;
+                    alert("Trial 라이센스 조건에 동의해주세요.");
+                }
+            }
+
+            return isValid;
+        }
+
+        // 조건부 입력 필드 표시/숨김 처리
+        $(document).ready(function() {
+            // 목적 - 기타
+            $("#purpose-7").on("change", function() {
+                if ($(this).is(":checked")) {
+                    $("#purpose-other").parent().addClass("show");
+                } else {
+                    $("#purpose-other").parent().removeClass("show");
+                    $("#purpose-other").val("");
+                }
+            });
+
+            // 기대 기능 - 기타
+            $("#feature-6").on("change", function() {
+                if ($(this).is(":checked")) {
+                    $("#feature-other").parent().addClass("show");
+                } else {
+                    $("#feature-other").parent().removeClass("show");
+                    $("#feature-other").val("");
+                }
+            });
+
+            // 경험 - 네
+            $('input[name="has-experience"]').on("change", function() {
+                if ($("#experience-yes").is(":checked")) {
+                    $("#experience-tools-wrapper").addClass("show");
+                } else {
+                    $("#experience-tools-wrapper").removeClass("show");
+                    $("#experience-tools").val("");
+                }
+            });
+
+            // 불편했던 점 - 기타
+            $("#pain-6").on("change", function() {
+                if ($(this).is(":checked")) {
+                    $("#pain-other").parent().addClass("show");
+                } else {
+                    $("#pain-other").parent().removeClass("show");
+                    $("#pain-other").val("");
+                }
+            });
+
+            // 유료 기능 - 기타
+            $("#paid-8").on("change", function() {
+                if ($(this).is(":checked")) {
+                    $("#paid-other").parent().addClass("show");
+                } else {
+                    $("#paid-other").parent().removeClass("show");
+                    $("#paid-other").val("");
+                }
+            });
+
+            // OS - 기타
+            $("#os-other").on("change", function() {
+                if ($(this).is(":checked")) {
+                    $("#os-other-text").parent().addClass("show");
+                } else {
+                    $("#os-other-text").parent().removeClass("show");
+                    $("#os-other-text").val("");
+                }
+            });
+
+            // 폼 제출 처리
+            $("#trial-form").on("submit", function(e) {
+                e.preventDefault();
+
+                if (!validateCurrentStep()) {
+                    return false;
+                }
+
+                // 모든 데이터 수집
+                const formData = {
+                    name: $("#name").val().trim(),
+                    email: $("#email").val().trim(),
+                    purpose: [],
+                    "expected-feature": $('input[name="expected-feature"]:checked').val() || "",
+                    "has-experience": $('input[name="has-experience"]:checked').val() || "",
+                    "experience-tools": $("#experience-tools").val().trim() || "",
+                    "pain-point": [],
+                    "paid-feature": [],
+                    os: $('input[name="os"]:checked').val() || "",
+                    "sns-link": $("#sns-link").val().trim() || "",
+                    "license-delivery": $("#license-delivery").is(":checked"),
+                    "privacy-consent": $("#privacy-consent").is(":checked"),
+                    "trial-consent": $("#trial-consent").is(":checked"),
+                    submittedAt: new Date().toISOString(),
+                };
+
+                // 체크박스 배열 수집
+                $('input[name="purpose"]:checked').each(function() {
+                    const value = $(this).val();
+                    if (value === "기타") {
+                        formData.purpose.push(
+                            "기타: " + ($("#purpose-other").val().trim() || "")
+                        );
+                    } else {
+                        formData.purpose.push(value);
+                    }
+                });
+
+                $('input[name="pain-point"]:checked').each(function() {
+                    const value = $(this).val();
+                    if (value === "기타") {
+                        formData["pain-point"].push(
+                            "기타: " + ($("#pain-other").val().trim() || "")
+                        );
+                    } else {
+                        formData["pain-point"].push(value);
+                    }
+                });
+
+                $('input[name="paid-feature"]:checked').each(function() {
+                    const value = $(this).val();
+                    if (value === "기타") {
+                        formData["paid-feature"].push(
+                            "기타: " + ($("#paid-other").val().trim() || "")
+                        );
+                    } else {
+                        formData["paid-feature"].push(value);
+                    }
+                });
+
+                // 기대 기능 기타 처리
+                if (formData["expected-feature"] === "기타") {
+                    formData["expected-feature"] =
+                        "기타: " + ($("#feature-other").val().trim() || "");
+                }
+
+                // OS 기타 처리
+                if (formData.os === "기타") {
+                    formData.os = "기타: " + ($("#os-other-text").val().trim() || "");
+                }
+
+                // JSON으로 POST 전송
+                const submitUrl = "https://script.google.com/macros/s/AKfycbytJQl2jYcwn7eMuQZQaQIwgJ71TM6asXRPL4ap7zySl-qPG2yMwDJIm2awFxpTM37cbg/exec";
+                
+                $.ajax({
+                    url: submitUrl,
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        // 성공 메시지 표시
+                        $(".survey-container").hide();
+                        $("#success-message").addClass("show");
+                        window.scrollTo({
+                            top: 0,
+                            behavior: "smooth"
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        alert(
+                            "제출 중 오류가 발생했습니다. 다시 시도해주세요.\n" + error
+                        );
+                        console.error("Submit error:", error);
+                    },
+                });
+
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
