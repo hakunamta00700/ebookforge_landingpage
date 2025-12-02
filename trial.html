@@ -1103,9 +1103,9 @@
 
                 // JSON으로 POST 전송
                 const submitUrl = "https://script.google.com/macros/s/AKfycbytJQl2jYcwn7eMuQZQaQIwgJ71TM6asXRPL4ap7zySl-qPG2yMwDJIm2awFxpTM37cbg/exec";
-
-                // fetch API 사용 (Google Apps Script와 더 잘 작동)
-                fetch(submitUrl, {
+                // https: //script.google.com/macros/s/AKfycbytJQl2jYcwn7eMuQZQaQIwgJ71TM6asXRPL4ap7zySl-qPG2yMwDJIm2awFxpTM37cbg/exec
+                    // fetch API 사용 (Google Apps Script와 더 잘 작동)
+                    fetch(submitUrl, {
                         method: 'POST',
                         mode: 'no-cors', // Google Apps Script Web App의 리다이렉트 특성상 no-cors 사용
                         headers: {
