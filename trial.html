@@ -1098,28 +1098,30 @@
 
                 // JSON으로 POST 전송
                 const submitUrl = "https://script.google.com/macros/s/AKfycbytJQl2jYcwn7eMuQZQaQIwgJ71TM6asXRPL4ap7zySl-qPG2yMwDJIm2awFxpTM37cbg/exec";
-                
-                $.ajax({
-                    url: submitUrl,
-                    type: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify(formData),
-                    success: function(response) {
-                        // 성공 메시지 표시
+
+                // fetch API 사용 (Google Apps Script와 더 잘 작동)
+                fetch(submitUrl, {
+                        method: 'POST',
+                        mode: 'no-cors', // Google Apps Script Web App의 리다이렉트 특성상 no-cors 사용
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(() => {
+                        // no-cors 모드에서는 응답을 읽을 수 없지만, 요청은 성공적으로 전송됨
+                        // Google Apps Script는 데이터를 저장하고 리다이렉트함
                         $(".survey-container").hide();
                         $("#success-message").addClass("show");
                         window.scrollTo({
                             top: 0,
                             behavior: "smooth"
                         });
-                    },
-                    error: function(xhr, status, error) {
-                        alert(
-                            "제출 중 오류가 발생했습니다. 다시 시도해주세요.\n" + error
-                        );
+                    })
+                    .catch((error) => {
                         console.error("Submit error:", error);
-                    },
-                });
+                        alert("제출 중 오류가 발생했습니다. 다시 시도해주세요.\n" + error);
+                    });
 
                 return false;
             });
