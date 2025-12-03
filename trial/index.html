@@ -175,6 +175,30 @@
       .title-section .description strong {
         color: var(--accent);
       }
+
+      .link-card {
+        margin-top: 16px;
+        border-radius: 14px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(15, 23, 42, 0.9);
+        padding: 10px 11px;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .link-card-title {
+        font-weight: 600;
+        color: #e5e7eb;
+      }
+
+      .link-card a {
+        word-break: break-all;
+        font-size: 11px;
+        color: var(--accent);
+      }
+
       /* 설문 카드 컨테이너 */
 
       .survey-container {
@@ -493,6 +517,18 @@
           <strong>EbookForge Trial License(20회)</strong>를 이메일로
           발송해드립니다.<br />
           모든 정보는 제품 개선 외의 목적으로 사용되지 않습니다.
+        </div>
+
+        <div class="link-card">
+          <div class="link-card-title">Windows 설치 파일 다운로드</div>
+          <a
+            id="download-link-trial"
+            href="https://github.com/hakunamta00700/ebookforge_release/releases/download/v0.0.59/EbookForge_Installer_v0.0.59+82.exe"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            EbookForge_Installer_v0.0.59+82.exe
+          </a>
         </div>
       </div>
 
@@ -1542,6 +1578,68 @@
           return false;
         });
       });
+    </script>
+
+    <script>
+      (function () {
+        const OWNER = "hakunamta00700";
+        const REPO = "ebookforge_release";
+        const API_URL = `https://api.github.com/repos/${OWNER}/${REPO}/releases/latest`;
+
+        async function updateDownloadLinks() {
+          const trialLink = document.getElementById("download-link-trial");
+
+          if (!trialLink) {
+            return;
+          }
+
+          try {
+            const response = await fetch(API_URL, {
+              headers: {
+                Accept: "application/vnd.github+json",
+              },
+            });
+
+            if (!response.ok) {
+              return;
+            }
+
+            const release = await response.json();
+            const assets = release.assets || [];
+            if (!assets.length) {
+              return;
+            }
+
+            const exeAsset =
+              assets.find((asset) => /\.exe$/i.test(asset.name || "")) ||
+              assets[0];
+
+            if (!exeAsset || !exeAsset.browser_download_url) {
+              return;
+            }
+
+            const url = exeAsset.browser_download_url;
+
+            if (trialLink) {
+              trialLink.href = url;
+              if (exeAsset.name) {
+                trialLink.textContent = exeAsset.name;
+              }
+            }
+          } catch (error) {
+            console.error(
+              "Failed to update download links from GitHub releases",
+              error
+            );
+          }
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", updateDownloadLinks);
+        } else {
+          updateDownloadLinks();
+        }
+      })();
     </script>
   </body>
 </html>
